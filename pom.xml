@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.sudoku</groupId>
-    <artifactId>SudokuGame</artifactId>
+    <artifactId>Sudoku</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>Sudoku</name>
+    <name>SudokuProject</name>
 
     <modules>
         <module>Model</module>
