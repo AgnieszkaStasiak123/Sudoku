@@ -91,6 +91,7 @@ public class SudokuBoard {
             for (int j = 0; j < 9; j++) {
                 for (int k = j + 1; k < 9; k++) {
                     if (classBoard[i][j] == classBoard[i][k]) {
+                        System.out.println("rows");
                         return false;
                     }
                 }
@@ -102,6 +103,7 @@ public class SudokuBoard {
             for (int j = 0; j < 9; j++) {
                 for (int k = j + 1; k < 9; k++) {
                     if (classBoard[j][i] == classBoard[k][i]) {
+                        System.out.println("columns");
                         return false;
                     }
                 }
@@ -112,15 +114,18 @@ public class SudokuBoard {
         int boxColStart;
         //TODO::My eyes are bleeding rn, but at least it works.
 
-        for (int row = 0; row < 9; row++) {
+        for (int row = 0; row < 9; row += 3) {
             for (int column = 0; column < 9; column += 3) {
                 boxRowStart = row - row % 3;
                 boxColStart = column - column % 3;
                 for (int r = boxRowStart; r < boxRowStart + 3; r++) {
                     for (int d = boxColStart; d < boxColStart + 3; d++) {
                         for (int k = r + 1; k < boxRowStart + 3; k++) {
-                            for (int l = d + 1; l < boxRowStart + 3; l++) {
+                            for (int l = d + 1; l < boxColStart + 3; l++) {
                                 if (classBoard[r][d] == classBoard[k][l]) {
+                                    System.out.println("boxes" + boxRowStart + " " + boxColStart);
+                                    System.out.println("boxes" + r + " " + d);
+
                                     return false;
                                 }
                             }
