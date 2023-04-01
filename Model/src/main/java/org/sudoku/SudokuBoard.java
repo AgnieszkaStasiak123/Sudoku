@@ -1,7 +1,6 @@
 package org.sudoku;
 
 import com.google.common.base.Objects;
-import java.util.Random;
 
 
 public class SudokuBoard {
@@ -9,82 +8,18 @@ public class SudokuBoard {
     private int[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
     //TODO::REMEMBER, WE ARE USING NOT COPIED BOARD HERE
+    private static SudokuSolver sudokuSolver;
 
-
-    public SudokuBoard() {
-        classBoard = new int[9][9];
-        fillBoard(classBoard);
+    public SudokuBoard(SudokuSolver sudokuSolver) {
+       this.sudokuSolver = sudokuSolver;
+       SolveGame();
     }
 
-    private static boolean fillBoard(int [][] board) {
-        Random random = new Random();
-        int row = -1;
-        int column = -1;
-        boolean stillEmpty = true;
-        int number = 0;
-
-
-        //I'm checking if board is still not fully filled.
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (board[i][j] == 0) {
-                    row = i;
-                    column = j;
-                    stillEmpty = false;
-                    break;
-                }
-            }
-            if (!stillEmpty) {
-                break;
-            }
-        }
-        if (stillEmpty) {
-            return true;
-        }
-
-        for (int i = 1; i < 15; i++) { //TODO::I don't like this for, think about sth better.
-            number = random.nextInt(9) + 1;
-            if (isSafe(board, number, row, column)) {
-                board[row][column] = number;
-                if (fillBoard(board)) {
-                    return true;
-                } else {
-                    board[row][column] = 0;
-                }
-            }
-        }
-
-        return false;
+    private void SolveGame() {
+        sudokuSolver.solve(this);
     }
 
-    //TODO::BOARD[ROW][COLUMN]
-    private static boolean isSafe(int[][] board, int numberToFill, int row, int column) {
-        for (int i = 0; i < 9; i++) {  //rows
-            if (board[row][i] == numberToFill) {
-                return false;
-            }
-        }
 
-        for (int i = 0; i < 9; i++) {  //columns
-            if (board[i][column] == numberToFill) {
-                return false;
-            }
-        }
-
-        int boxRowStart = row - row % 3;
-        int boxColStart = column - column % 3;
-
-        for (int r = boxRowStart; r < boxRowStart + 3; r++) {
-            for (int d = boxColStart; d < boxColStart + 3; d++) {
-                if (board[r][d] == numberToFill) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
 
     public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {       //rows
