@@ -4,11 +4,12 @@ import java.util.Random;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    public BacktrackingSudokuSolver() {
-
+    @Override
+    public void solve(SudokuBoard sudokuBoard) {
+        solveBacktracking(sudokuBoard);
     }
 
-    public void solve(SudokuBoard board){
+    public boolean solveBacktracking(SudokuBoard board){
         Random random = new Random();
         int row = -1;
         int column = -1;
@@ -39,7 +40,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             number = random.nextInt(9) + 1;
             if (isSafe(board, number, row, column)) {
                 board.setValue(row,column, number);
-                if (solve(board)) {
+                if (solveBacktracking(board)) {
                     return true;
                 } else {
                     board.setValue(row,column, 0);

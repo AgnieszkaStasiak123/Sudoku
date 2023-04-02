@@ -8,7 +8,7 @@ public class SudokuBoard {
     private int[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
     //TODO::REMEMBER, WE ARE USING NOT COPIED BOARD HERE
-    private static SudokuSolver sudokuSolver;
+    private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
        this.sudokuSolver = sudokuSolver;
@@ -16,6 +16,7 @@ public class SudokuBoard {
     }
 
     private void SolveGame() {
+        classBoard = new int[9][9];
         sudokuSolver.solve(this);
     }
 
