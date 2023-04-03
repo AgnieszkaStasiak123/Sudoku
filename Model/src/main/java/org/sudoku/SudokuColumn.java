@@ -1,4 +1,4 @@
 package org.sudoku;
 
-public class SudokuColumn {
+public class SudokuColumn extends SudokuType{
 }
