@@ -12,10 +12,10 @@ public class SudokuBoard {
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
        this.sudokuSolver = sudokuSolver;
-       SolveGame();
+       solveGame();
     }
 
-    private void SolveGame() {
+    private void solveGame() {
         classBoard = new int[9][9];
         sudokuSolver.solve(this);
     }

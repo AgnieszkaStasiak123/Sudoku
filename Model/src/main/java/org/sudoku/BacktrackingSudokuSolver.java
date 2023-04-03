@@ -9,7 +9,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         solveBacktracking(sudokuBoard);
     }
 
-    public boolean solveBacktracking(SudokuBoard board){
+    public boolean solveBacktracking(SudokuBoard board) {
         Random random = new Random();
         int row = -1;
         int column = -1;
