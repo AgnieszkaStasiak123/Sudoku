@@ -5,7 +5,7 @@ import com.google.common.base.Objects;
 
 public class SudokuBoard {
 
-    private int[][] classBoard;
+    private SudokuField[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
     //TODO::REMEMBER, WE ARE USING NOT COPIED BOARD HERE
     private SudokuSolver sudokuSolver;
@@ -16,7 +16,7 @@ public class SudokuBoard {
     }
 
     private void solveGame() {
-        classBoard = new int[9][9];
+        classBoard = new SudokuField[9][9];
         sudokuSolver.solve(this);
     }
 
@@ -77,11 +77,11 @@ public class SudokuBoard {
 
 
     public int getValue(int row, int column) {
-        return classBoard[row][column];
+        return classBoard[row][column].getFieldValue();
     }
 
     public void setValue(int row, int column, int valueToSet) {
-        classBoard[row][column] = valueToSet;
+        classBoard[row][column].setFieldValue(valueToSet);
     }
 
     @Override
