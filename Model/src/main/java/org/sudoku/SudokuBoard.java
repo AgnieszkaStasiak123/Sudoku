@@ -7,7 +7,7 @@ public class SudokuBoard {
 
     private SudokuField[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
-    //TODO::REMEMBER, WE ARE USING NOT COPIED BOARD HERE
+    //REMEMBER, WE ARE USING NOT COPIED BOARD HERE
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
@@ -22,7 +22,7 @@ public class SudokuBoard {
 
 
 
-    public boolean checkBoard() {
+    private boolean checkBoard() { //this out to field //TODO:: THIS LEFT TO DO
         for (int i = 0; i < 9; i++) {       //rows
             for (int j = 0; j < 9; j++) {
                 for (int k = j + 1; k < 9; k++) {
@@ -82,6 +82,42 @@ public class SudokuBoard {
 
     public void setValue(int row, int column, int valueToSet) {
         classBoard[row][column].setFieldValue(valueToSet);
+    }
+
+    public SudokuRow getRow(int x) {
+        SudokuRow row = new SudokuRow();
+        SudokuField[] values = new SudokuField[9];
+        for (int i = 0; i<9; i++){
+            values[i].setFieldValue(classBoard[x][i].getFieldValue());
+        }
+        row.setToType(values);
+
+        return row;
+    }
+
+    public  SudokuColumn getColumn(int y) {
+        SudokuColumn column = new SudokuColumn();
+        SudokuField[] values = new SudokuField[9];
+        for (int i = 0; i<9; i++){
+            values[i].setFieldValue(classBoard[i][y].getFieldValue());
+        }
+        column.setToType(values);
+        return column;
+    }
+
+    //JEŻELI CHCEMY DOSTAĆ KTÓRY BOX -> i/3
+    //JEŻELI POŁOŻENIE W BOXIE -> i%3
+    //ZAKŁDAM, ŻE PODAJEMY WSPÓŁRZĘDNE BOXA, A NIE WSPÓŁRZĘDNE JAKIEGOŚ FIELDA, I Z TEGO MAMY WYWNIOSKOWAĆ JAKI BOX (ITERUJEMY OD 0!!!)
+    public  SudokuBox getBox(int x, int y){
+        SudokuBox box = new SudokuBox();
+        SudokuField[][] values = new SudokuField[3][3];
+        for(int i = 0; i<3; i++){
+            for(int j = 0; j<3; j++){
+                values[i][j].setFieldValue(classBoard[x*3+i][y*3+j].getFieldValue());
+            }
+        }
+        box.setToType(values); //TODO:: rewrite this to [9] array
+        return box;
     }
 
     @Override

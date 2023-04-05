@@ -51,7 +51,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return false;
     }
 
-    //TODO::BOARD[ROW][COLUMN]
+    //BOARD[ROW][COLUMN]
     private static boolean isSafe(SudokuBoard board, int numberToFill, int row, int column) {
         for (int i = 0; i < 9; i++) {  //rows
             if (board.getValue(row,i) == numberToFill) {
