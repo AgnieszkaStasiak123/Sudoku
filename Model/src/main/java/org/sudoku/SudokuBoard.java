@@ -1,9 +1,11 @@
 package org.sudoku;
 
 import com.google.common.base.Objects;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class SudokuBoard {
+public class SudokuBoard implements Observer {
 
     private SudokuField[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
@@ -25,6 +27,7 @@ public class SudokuBoard {
         for (int i = 0;  i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 classBoard[i][j] = new SudokuField();
+                classBoard[i][j].addObserver(this);
             }
         }
     }
@@ -158,4 +161,11 @@ public class SudokuBoard {
     public int hashCode() {
         return Objects.hashCode((Object) classBoard);
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        checkBoard();
+    }
+
+
 }
