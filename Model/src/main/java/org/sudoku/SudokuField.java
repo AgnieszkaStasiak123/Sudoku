@@ -6,11 +6,6 @@ public class SudokuField extends Observable {
 
     private int value;
 
-    //  private SudokuRow row;
-    //  private SudokuColumn column;
-    //  private SudokuBox box;
-
-
     public int getFieldValue() {
         return value;
     }

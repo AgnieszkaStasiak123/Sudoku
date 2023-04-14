@@ -1,28 +1,28 @@
 package org.sudoku;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SudokuType {
 
-    private SudokuField[] sudokuFields = new SudokuField[9]; //It allways is gonna be 9 things.
-
+    private List<SudokuField> sudokuFields = Arrays.asList(new SudokuField[9]);
 
     public SudokuType() {
-        for (SudokuField field: sudokuFields) {
-            field = new SudokuField();
-        }
+        sudokuFields.replaceAll(ignored -> new SudokuField());
     }
 
     public SudokuField getType(int i) {
-        return sudokuFields[i];
+        return sudokuFields.get(i);
     }
 
     public void setToType(SudokuField[] sudokuFields) {
-        this.sudokuFields = sudokuFields;
+        this.sudokuFields = List.of(sudokuFields);
     }
 
     public boolean verify() {
         for (int i = 0; i < 9; i++) {
             for (int j = i + 1; j < 9; j++) {
-                if (sudokuFields[i].getFieldValue() == sudokuFields[j].getFieldValue()) {
+                if (sudokuFields.get(i).getFieldValue() == sudokuFields.get(j).getFieldValue()) {
                     return false;
                 }
             }

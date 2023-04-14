@@ -19,6 +19,7 @@ public class SudokuBoard implements Observer {
 
     private void solveGame() {
         classBoard = new SudokuField[9][9];
+        //checkBoard();
         initializeArray();
         sudokuSolver.solve(this);
     }
@@ -34,54 +35,15 @@ public class SudokuBoard implements Observer {
 
 
     public boolean checkBoard() {
-        for (int i = 0; i < 9; i++) {       //rows
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                for (int k = j + 1; k < 9; k++) {
-                    if (classBoard[i][j] == classBoard[i][k]) {
-                        System.out.println("rows");
+                if (!getBox(j, i).verify()) {
+                    if (!(getRow(i).verify() && getColumn(i).verify()) || !getBox(j, i).verify()) {
                         return false;
                     }
                 }
             }
         }
-
-
-        for (int i = 0; i < 9; i++) {       //columns
-            for (int j = 0; j < 9; j++) {
-                for (int k = j + 1; k < 9; k++) {
-                    if (classBoard[j][i] == classBoard[k][i]) {
-                        System.out.println("columns");
-                        return false;
-                    }
-                }
-            }
-        }
-        //blocks
-        int boxRowStart;
-        int boxColStart;
-        //TODO::My eyes are bleeding rn, but at least it works.
-
-        for (int row = 0; row < 9; row += 3) {
-            for (int column = 0; column < 9; column += 3) {
-                boxRowStart = row - row % 3;
-                boxColStart = column - column % 3;
-                for (int r = boxRowStart; r < boxRowStart + 3; r++) {
-                    for (int d = boxColStart; d < boxColStart + 3; d++) {
-                        for (int k = r + 1; k < boxRowStart + 3; k++) {
-                            for (int l = d + 1; l < boxColStart + 3; l++) {
-                                if (classBoard[r][d] == classBoard[k][l]) {
-                                    System.out.println("boxes" + boxRowStart + " " + boxColStart);
-                                    System.out.println("boxes" + r + " " + d);
-
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
 
         return true;
     }
@@ -116,19 +78,25 @@ public class SudokuBoard implements Observer {
         return column;
     }
 
-    //JEŻELI CHCEMY DOSTAĆ KTÓRY BOX -> i/3
-    //JEŻELI POŁOŻENIE W BOXIE -> i%3
-    //ZAKŁDAM, ŻE PODAJEMY WSPÓŁRZĘDNE BOXA, A NIE WSPÓŁRZĘDNE JAKIEGOŚ FIELDA,
-    // I Z TEGO MAMY WYWNIOSKOWAĆ JAKI BOX (ITERUJEMY OD 0!!!)
     public  SudokuBox getBox(int x, int y) {
         SudokuBox box = new SudokuBox();
         SudokuField[] values = new SudokuField[9];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                values[i * 3 + j] = classBoard[x * 3 + i][y * 3 + j];
+
+        int squareStartRow = y - y % 3;
+        int squareStartColumn = x - x % 3;
+
+        int counter = 0;
+
+        for (int i = squareStartColumn; i < squareStartColumn + 3; i++) {
+            for (int j = squareStartRow; j < squareStartRow + 3; j++) {
+
+                values[counter] = classBoard[j][i];
+
+                counter++;
             }
         }
-        box.setToType(values); //TODO:: rewrite this to [9] array
+
+        box.setToType(values);
         return box;
     }
 
@@ -137,7 +105,7 @@ public class SudokuBoard implements Observer {
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                msg.append(classBoard[i][j]).append("  ");
+                msg.append(classBoard[i][j].getFieldValue()).append("  ");
             }
             msg.append("\n");
         }

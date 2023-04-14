@@ -48,6 +48,10 @@ public class SudokuBoardTest {
         assertFalse(board.equals(5));
     }
 
+    void observerTest(){
+        assertTrue(board.getColumn(0).getType(0).countObservers() == 1);
+    }
+
 
     @Test
     void hashCodeTest(){
