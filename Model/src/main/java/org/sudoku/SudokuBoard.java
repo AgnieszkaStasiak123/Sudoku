@@ -17,12 +17,20 @@ public class SudokuBoard {
 
     private void solveGame() {
         classBoard = new SudokuField[9][9];
+        initializeArray();
         sudokuSolver.solve(this);
     }
 
+    private void initializeArray() {
+        for (int i = 0;  i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                classBoard[i][j] = new SudokuField();
+            }
+        }
+    }
 
 
-    private boolean checkBoard() { //this out to field //TODO:: THIS LEFT TO DO
+    public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {       //rows
             for (int j = 0; j < 9; j++) {
                 for (int k = j + 1; k < 9; k++) {
@@ -87,8 +95,8 @@ public class SudokuBoard {
     public SudokuRow getRow(int x) {
         SudokuRow row = new SudokuRow();
         SudokuField[] values = new SudokuField[9];
-        for (int i = 0; i<9; i++){
-            values[i].setFieldValue(classBoard[x][i].getFieldValue());
+        for (int i = 0; i < 9; i++) {
+            values[i] = classBoard[x][i];
         }
         row.setToType(values);
 
@@ -98,8 +106,8 @@ public class SudokuBoard {
     public  SudokuColumn getColumn(int y) {
         SudokuColumn column = new SudokuColumn();
         SudokuField[] values = new SudokuField[9];
-        for (int i = 0; i<9; i++){
-            values[i].setFieldValue(classBoard[i][y].getFieldValue());
+        for (int i = 0; i < 9; i++) {
+            values[i] = classBoard[i][y];
         }
         column.setToType(values);
         return column;
@@ -107,13 +115,14 @@ public class SudokuBoard {
 
     //JEŻELI CHCEMY DOSTAĆ KTÓRY BOX -> i/3
     //JEŻELI POŁOŻENIE W BOXIE -> i%3
-    //ZAKŁDAM, ŻE PODAJEMY WSPÓŁRZĘDNE BOXA, A NIE WSPÓŁRZĘDNE JAKIEGOŚ FIELDA, I Z TEGO MAMY WYWNIOSKOWAĆ JAKI BOX (ITERUJEMY OD 0!!!)
-    public  SudokuBox getBox(int x, int y){
+    //ZAKŁDAM, ŻE PODAJEMY WSPÓŁRZĘDNE BOXA, A NIE WSPÓŁRZĘDNE JAKIEGOŚ FIELDA,
+    // I Z TEGO MAMY WYWNIOSKOWAĆ JAKI BOX (ITERUJEMY OD 0!!!)
+    public  SudokuBox getBox(int x, int y) {
         SudokuBox box = new SudokuBox();
-        SudokuField[][] values = new SudokuField[3][3];
-        for(int i = 0; i<3; i++){
-            for(int j = 0; j<3; j++){
-                values[i][j].setFieldValue(classBoard[x*3+i][y*3+j].getFieldValue());
+        SudokuField[] values = new SudokuField[9];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                values[i * 3 + j] = classBoard[x * 3 + i][y * 3 + j];
             }
         }
         box.setToType(values); //TODO:: rewrite this to [9] array

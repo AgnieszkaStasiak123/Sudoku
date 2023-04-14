@@ -4,9 +4,9 @@ public class SudokuField {
 
     private int value;
 
-//    private SudokuRow row;
-//    private SudokuColumn column;
-//    private SudokuBox box;
+    //  private SudokuRow row;
+    //  private SudokuColumn column;
+    //  private SudokuBox box;
 
     public int getFieldValue() {
         return value;

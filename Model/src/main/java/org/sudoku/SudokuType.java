@@ -6,7 +6,7 @@ public class SudokuType {
 
 
     public SudokuType() {
-        for(SudokuField field: sudokuFields){
+        for (SudokuField field: sudokuFields) {
             field = new SudokuField();
         }
     }
@@ -19,10 +19,10 @@ public class SudokuType {
         this.sudokuFields = sudokuFields;
     }
 
-    public boolean verify(){
-        for (int i=0; i<9; i++){
-            for(int j = 0; j<9; j++){
-                if(sudokuFields[i].getFieldValue() == sudokuFields[j].getFieldValue()){
+    public boolean verify() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = i + 1; j < 9; j++) {
+                if (sudokuFields[i].getFieldValue() == sudokuFields[j].getFieldValue()) {
                     return false;
                 }
             }

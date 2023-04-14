@@ -15,8 +15,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         int column = -1;
         boolean stillEmpty = true;
         int number = 0;
-
-
         //I'm checking if board is still not fully filled.
 
         for (int i = 0; i < 9; i++) {
