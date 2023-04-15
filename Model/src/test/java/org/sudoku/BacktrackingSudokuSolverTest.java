@@ -9,6 +9,8 @@ public class BacktrackingSudokuSolverTest {
     SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
     SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
 
+    BacktrackingSudokuSolver  sudokuSolver = new BacktrackingSudokuSolver();
+    BacktrackingSudokuSolver sudokuSolver1 = new BacktrackingSudokuSolver();
     @Test
     void isRandomBoard() {
         int counter = 0;
@@ -20,5 +22,27 @@ public class BacktrackingSudokuSolverTest {
             }
         }
         assertTrue(counter<81);
+    }
+
+    @Test
+    void equalsTest(){
+
+
+       assertTrue(sudokuSolver1.equals(sudokuSolver1));
+       assertFalse(sudokuSolver1.equals(sudokuSolver));
+
+        assertFalse(sudokuSolver1.equals(5));
+        assertFalse(sudokuSolver1.equals(null));
+    }
+
+    @Test
+    void hashCodeTest(){
+        assertNotEquals(sudokuSolver.hashCode(),sudokuSolver1.hashCode());
+        assertEquals(sudokuSolver.hashCode(),sudokuSolver.hashCode());
+    }
+
+    @Test
+    void toStringTest(){
+        assertFalse(sudokuSolver.toString() == sudokuSolver1.toString());
     }
 }

@@ -1,5 +1,6 @@
 package org.sudoku;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,5 +29,29 @@ public class SudokuType {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SudokuType that = (SudokuType) o;
+        return Objects.equal(sudokuFields, that.sudokuFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(sudokuFields);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("sudokuFields", sudokuFields)
+                .toString();
     }
 }

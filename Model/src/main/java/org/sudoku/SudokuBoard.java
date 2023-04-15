@@ -37,11 +37,10 @@ public class SudokuBoard implements Observer {
     public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (!getBox(j, i).verify()) {
                     if (!(getRow(i).verify() && getColumn(i).verify()) || !getBox(j, i).verify()) {
                         return false;
                     }
-                }
+
             }
         }
 

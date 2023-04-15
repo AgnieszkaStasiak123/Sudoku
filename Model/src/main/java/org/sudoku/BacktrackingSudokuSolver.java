@@ -1,8 +1,10 @@
 package org.sudoku;
 
+import com.google.common.base.Objects;
 import java.util.Random;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
+
 
     @Override
     public void solve(SudokuBoard sudokuBoard) {
@@ -75,5 +77,21 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .toString();
     }
 }

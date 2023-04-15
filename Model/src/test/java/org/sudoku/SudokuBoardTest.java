@@ -36,26 +36,27 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void toStringTest(){
-        assertNotEquals(board.toString(), board1.toString());
-    }
-
-    @Test
-    void equalsTest(){
-        assertTrue(board.equals(board));
-        assertFalse(board.equals(board1));
-        assertFalse(board.equals(null));
-        assertFalse(board.equals(5));
-    }
-
     void observerTest(){
         assertTrue(board.getColumn(0).getType(0).countObservers() == 1);
     }
 
+    @Test
+    void equalsTest(){
+        assertTrue(board1.equals(board1));
+        assertFalse(board1.equals(board));
+
+        assertFalse(board1.equals(5));
+        assertFalse(board1.equals(null));
+    }
 
     @Test
     void hashCodeTest(){
-        assertNotEquals(board.hashCode(), board1.hashCode());
+        assertNotEquals(board.hashCode(),board1.hashCode());
+        assertEquals(board.hashCode(),board.hashCode());
     }
 
+    @Test
+    void toStringTest(){
+        assertFalse(board.toString() == board1.toString());
+    }
 }

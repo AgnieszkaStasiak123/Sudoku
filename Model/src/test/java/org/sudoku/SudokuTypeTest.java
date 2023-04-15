@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SudokuTypeTest {
 
     SudokuBox box = new SudokuBox();
+    SudokuBox box1 = new SudokuBox();
 
     @Test
     void setToTypeTest(){
@@ -35,6 +36,30 @@ public class SudokuTypeTest {
         box.setToType(getValidFields());
 
         assertTrue(box.getType(0).countObservers() == 0);
+    }
+
+    @Test
+    void equalsTest(){
+
+        box1.setToType(getValidFields());
+        assertTrue(box.equals(box));
+        assertFalse(box1.equals(box));
+
+        assertFalse(box1.equals(5));
+        assertFalse(box1.equals(null));
+    }
+
+    @Test
+    void hashCodeTest(){
+        box1.setToType(getValidFields());
+
+        assertFalse(box.hashCode() == box1.hashCode());
+        assertEquals(box.hashCode(),box.hashCode());
+    }
+
+    @Test
+    void toStringTest(){
+        assertFalse(box.toString() == box1.toString());
     }
 
     SudokuField[] getInvalidFields()
