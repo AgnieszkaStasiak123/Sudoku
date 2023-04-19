@@ -1,11 +1,12 @@
 package org.sudoku;
 
 import com.google.common.base.Objects;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
 
-public class SudokuBoard implements Observer {
+public class SudokuBoard implements Observer, Serializable {
 
     private SudokuField[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
