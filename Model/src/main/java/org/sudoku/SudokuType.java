@@ -1,10 +1,13 @@
 package org.sudoku;
 
 import com.google.common.base.Objects;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuType {
+public class SudokuType implements Serializable,Cloneable {
 
     private List<SudokuField> sudokuFields = Arrays.asList(new SudokuField[9]);
 
@@ -29,6 +32,10 @@ public class SudokuType {
             }
         }
         return true;
+    }
+
+    public List<SudokuField> getSudokuFieldList() {
+        return new ArrayList<>(sudokuFields);
     }
 
     @Override

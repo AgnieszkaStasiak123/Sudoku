@@ -6,16 +6,20 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class SudokuBoard implements Observer, Serializable {
+public class SudokuBoard implements Observer, Serializable, Cloneable  {
 
     private SudokuField[][] classBoard;
     //I am using Backtracking algorithm to solve Sudoku.
-    //REMEMBER, WE ARE USING NOT COPIED BOARD HERE
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver sudokuSolver) {
-       this.sudokuSolver = sudokuSolver;
-       solveGame();
+        this.sudokuSolver = sudokuSolver;
+        solveGame();
+    }
+
+    public SudokuBoard(SudokuBoard board) {
+        this.sudokuSolver = board.sudokuSolver;
+        solveGame();
     }
 
     private void solveGame() {
@@ -26,7 +30,7 @@ public class SudokuBoard implements Observer, Serializable {
     }
 
     private void initializeArray() {
-        for (int i = 0;  i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 classBoard[i][j] = new SudokuField();
                 classBoard[i][j].addObserver(this);
@@ -38,9 +42,9 @@ public class SudokuBoard implements Observer, Serializable {
     public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                    if (!(getRow(i).verify() && getColumn(i).verify()) || !getBox(j, i).verify()) {
-                        return false;
-                    }
+                if (!(getRow(i).verify() && getColumn(i).verify()) || !getBox(j, i).verify()) {
+                    return false;
+                }
 
             }
         }
@@ -68,7 +72,7 @@ public class SudokuBoard implements Observer, Serializable {
         return row;
     }
 
-    public  SudokuColumn getColumn(int y) {
+    public SudokuColumn getColumn(int y) {
         SudokuColumn column = new SudokuColumn();
         SudokuField[] values = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
@@ -78,7 +82,7 @@ public class SudokuBoard implements Observer, Serializable {
         return column;
     }
 
-    public  SudokuBox getBox(int x, int y) {
+    public SudokuBox getBox(int x, int y) {
         SudokuBox box = new SudokuBox();
         SudokuField[] values = new SudokuField[9];
 
@@ -99,6 +103,15 @@ public class SudokuBoard implements Observer, Serializable {
         box.setToType(values);
         return box;
     }
+
+    public void isEditableField(int row, int collumn, boolean valueBool) {
+        classBoard[row][collumn].setEditable(valueBool);
+    }
+
+    public boolean getEditableField(int row, int collumn) {
+        return classBoard[row][collumn].isEditable();
+    }
+
 
     @Override
     public String toString() {
@@ -136,4 +149,18 @@ public class SudokuBoard implements Observer, Serializable {
     }
 
 
+
+    @Override
+    protected SudokuBoard clone() throws CloneNotSupportedException {
+        SudokuBoard sb = new SudokuBoard(new BacktrackingSudokuSolver());
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sb.setValue(this.getValue(i, j), i, j);
+            }
+        }
+
+        return sb;
+    }
 }
+

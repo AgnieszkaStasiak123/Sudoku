@@ -4,9 +4,11 @@ import com.google.common.base.Objects;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class SudokuField extends Observable implements Serializable {
+public class SudokuField extends Observable implements Serializable, Comparable<SudokuField>,Cloneable {
 
     private int value;
+    private  boolean isEditable;
+
 
     public int getFieldValue() {
         return value;
@@ -17,6 +19,14 @@ public class SudokuField extends Observable implements Serializable {
         this.value = value;
         setChanged();
         notifyObservers(value);
+    }
+
+    public boolean isEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(boolean editable) {
+        isEditable = editable;
     }
 
     @Override
@@ -41,5 +51,22 @@ public class SudokuField extends Observable implements Serializable {
         return Objects.toStringHelper(this)
                 .add("value", value)
                 .toString();
+    }
+
+    @Override
+    public int compareTo(SudokuField o) {
+        if (o == null) {
+            throw new NullPointerException("Null pointer");
+        }
+
+
+        return value - o.value;
+    }
+
+    @Override
+    protected SudokuField clone() throws CloneNotSupportedException {
+        SudokuField field = new SudokuField();
+        field.setFieldValue(value);
+        return field;
     }
 }
