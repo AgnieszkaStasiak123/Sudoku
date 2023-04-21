@@ -1,3 +1,5 @@
+package org.sudoku;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;

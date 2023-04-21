@@ -1,3 +1,4 @@
+package org.sudoku;
 
 import java.util.function.UnaryOperator;
 import javafx.fxml.FXML;
@@ -6,8 +7,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.converter.IntegerStringConverter;
-import org.sudoku.BacktrackingSudokuSolver;
-import org.sudoku.SudokuBoard;
 
 
 public class SudokuWindowController {
@@ -15,9 +14,6 @@ public class SudokuWindowController {
     @FXML
     private GridPane gridPane;
     private SudokuBoard sudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver());
-
-    @FXML
-    private TextField saveTextField;
 
     private  TextField[][] valuesGridPane = new TextField[9][9];
 
@@ -43,7 +39,8 @@ public class SudokuWindowController {
                 textField.setFont(Font.font(18));
                 textField.setTextFormatter(new TextFormatter<Integer>(
                         new IntegerStringConverter(),0,integerFilter));
-                if (sudokuBoard.getValue(i,j) != 0 || (isLoaded && !sudokuBoard.getEditableField(i,j))) {
+                if (sudokuBoard.getValue(i,j) != 0
+                        || (isLoaded && !sudokuBoard.getEditableField(i,j))) {
 
                     sudokuBoard.isEditableField(i, j, false);
                     textField.setText(String.valueOf(sudokuBoard.getValue(i, j)));
@@ -62,19 +59,6 @@ public class SudokuWindowController {
         }
 
 
-    }
-
-    private void updateBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                String fieldValue = valuesGridPane[i][j].getText();
-                if (!fieldValue.equals("")) {
-                    sudokuBoard.setValue(i, j,Integer.parseInt(fieldValue));
-                } else {
-                    sudokuBoard.setValue(i, j, 0);
-                }
-            }
-        }
     }
 
     public void setSudokuBoard(SudokuBoard sudokuBoard) {

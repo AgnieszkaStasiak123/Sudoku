@@ -18,7 +18,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
         int column = -1;
         boolean stillEmpty = true;
         int number = 0;
-        //I'm checking if board is still not fully filled.
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -37,7 +36,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
             return true;
         }
 
-        for (int i = 1; i < 15; i++) { //TODO::I don't like this for, think about sth better.
+        for (int i = 1; i < 15; i++) {
             number = random.nextInt(9) + 1;
             if (isSafe(board, number, row, column)) {
                 board.setValue(row,column, number);

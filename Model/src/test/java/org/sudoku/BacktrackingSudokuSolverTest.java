@@ -27,7 +27,6 @@ public class BacktrackingSudokuSolverTest {
     @Test
     void equalsTest(){
 
-
        assertTrue(sudokuSolver1.equals(sudokuSolver1));
        assertFalse(sudokuSolver1.equals(sudokuSolver));
 

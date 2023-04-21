@@ -1,4 +1,4 @@
-import org.sudoku.SudokuBoard;
+package org.sudoku;
 
 import java.util.Random;
 

@@ -5,7 +5,7 @@ import java.util.List;
 public class SudokuBox extends SudokuType {
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Object clone() {
         SudokuField[] fields = new SudokuField[9];
         List<SudokuField> fields1 = getSudokuFieldList();
 

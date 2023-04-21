@@ -4,7 +4,8 @@ import com.google.common.base.Objects;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class SudokuField extends Observable implements Serializable, Comparable<SudokuField>,Cloneable {
+public class SudokuField extends Observable implements Serializable,
+        Comparable<SudokuField>,Cloneable {
 
     private int value;
     private  boolean isEditable;
@@ -64,7 +65,7 @@ public class SudokuField extends Observable implements Serializable, Comparable<
     }
 
     @Override
-    protected SudokuField clone() throws CloneNotSupportedException {
+    protected SudokuField clone() {
         SudokuField field = new SudokuField();
         field.setFieldValue(value);
         return field;

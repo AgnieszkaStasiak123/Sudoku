@@ -24,7 +24,6 @@ public class SudokuBoard implements Observer, Serializable, Cloneable  {
 
     private void solveGame() {
         classBoard = new SudokuField[9][9];
-        //checkBoard();
         initializeArray();
         sudokuSolver.solve(this);
     }
@@ -45,10 +44,8 @@ public class SudokuBoard implements Observer, Serializable, Cloneable  {
                 if (!(getRow(i).verify() && getColumn(i).verify()) || !getBox(j, i).verify()) {
                     return false;
                 }
-
             }
         }
-
         return true;
     }
 
@@ -95,7 +92,6 @@ public class SudokuBoard implements Observer, Serializable, Cloneable  {
             for (int j = squareStartRow; j < squareStartRow + 3; j++) {
 
                 values[counter] = classBoard[j][i];
-
                 counter++;
             }
         }
@@ -151,7 +147,7 @@ public class SudokuBoard implements Observer, Serializable, Cloneable  {
 
 
     @Override
-    protected SudokuBoard clone() throws CloneNotSupportedException {
+    protected SudokuBoard clone() {
         SudokuBoard sb = new SudokuBoard(new BacktrackingSudokuSolver());
 
         for (int i = 0; i < 9; i++) {

@@ -1,7 +1,6 @@
 package org.sudoku;
 
 import com.google.common.base.Objects;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
