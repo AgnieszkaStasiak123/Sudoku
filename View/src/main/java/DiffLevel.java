@@ -7,7 +7,7 @@ public class DiffLevel {
             new String[]{"Easy","Medium","Hard","Latwy", "Sredni", "Trudny"};
 
     private int[][] difficulty = new int[9][9];
-    private int baseValue = 10;
+    private int baseValue = 20;
     private int currentDifficultyCounter;
 
     public DiffLevel(String difficulty) {
@@ -21,20 +21,22 @@ public class DiffLevel {
 
     public void setDifficulty(boolean isLoaded, SudokuBoard sudokuBoard) {
         Random rand = new Random();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (isLoaded) {
-                    difficulty[i][j] = 1;
-                    continue;
-                }
-                int shouldShow = rand.nextInt(2);
+        while (currentDifficultyCounter > 0) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (isLoaded) {
+                        difficulty[i][j] = 1;
+                        continue;
+                    }
+                    int shouldShow = rand.nextInt(2);
 
-                if (shouldShow == 1 || currentDifficultyCounter <= 0) {
-                    difficulty[i][j] = 1;
-                } else {
-                    difficulty[i][j] = 0;
-                    currentDifficultyCounter--;
-                    sudokuBoard.setValue(i,j,0);
+                    if (shouldShow == 1 || currentDifficultyCounter <= 0) {
+                        difficulty[i][j] = 1;
+                    } else {
+                        difficulty[i][j] = 0;
+                        currentDifficultyCounter--;
+                        sudokuBoard.setValue(i, j, 0);
+                    }
                 }
             }
         }

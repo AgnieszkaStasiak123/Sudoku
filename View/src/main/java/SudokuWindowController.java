@@ -1,9 +1,6 @@
 
 import java.util.function.UnaryOperator;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
@@ -34,7 +31,6 @@ public class SudokuWindowController {
                 return change;
             } else if  (newText.matches("0")) {
                 change.setText("");
-                //System.out.println(change.getText());
                 return change;
             }
             return null;
@@ -68,20 +64,6 @@ public class SudokuWindowController {
 
     }
 
-    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
-        for (Node node : childrens) {
-            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-                result = node;
-                break;
-            }
-
-        }
-
-        return result;
-    }
-
     private void updateBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -95,34 +77,8 @@ public class SudokuWindowController {
         }
     }
 
-//    public void saveToFile() throws ExceptionDao {
-//        FileSudokuBoardDao dao = (FileSudokuBoardDao) new SudokuBoardDaoFactory()
-//                .getFileDao("save");
-//        dao.write(sudokuBoard);
-//        dao.close();
-//
-//    } //try with resources I korzystanie z DAO
-
     public void setSudokuBoard(SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
     }
-
-//    public void saveToBase() throws ExceptionDao {
-//        updateBoard();
-//        String filename  = saveTextField.getText();
-//        Dao<SudokuBoard> jdbcSudokuBoardDao =  SudokuBoardDaoFactory.getJdbc(filename);
-//
-//
-//        try {
-//            jdbcSudokuBoardDao.write(sudokuBoard);
-//        } catch (ExceptionBase e) {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Wrong file name. Possible duplicate.");
-//            alert.showAndWait();
-//        }
-//
-//    }
-
 
 }

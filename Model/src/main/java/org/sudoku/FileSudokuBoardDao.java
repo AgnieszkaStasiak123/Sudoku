@@ -1,21 +1,24 @@
 package org.sudoku;
 
+import org.sudoku.exceptions.ExceptionDao;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ResourceBundle;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
-
+    private ResourceBundle listBundle = ResourceBundle.getBundle("org.example.Language");
     public FileSudokuBoardDao(String fileName) {
         this.fileName = fileName + ".txt";
     }
 
     @Override
-    public SudokuBoard read() {
+    public SudokuBoard read() throws ExceptionDao {
         SudokuBoard obj;
 
         try (FileInputStream fileInputStream = new FileInputStream(fileName);
@@ -23,9 +26,12 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
             obj = (SudokuBoard) objectInputStream.readObject();
 
-        } catch (ClassNotFoundException | IOException e) {
+        } catch (ClassNotFoundException e) {
 
-            throw new RuntimeException(e);
+            throw new ExceptionDao(listBundle.getObject("_classError").toString());
+
+        } catch (IOException e) {
+            throw new ExceptionDao(listBundle.getObject("_fileError").toString());
 
         }
 
@@ -33,7 +39,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void write(SudokuBoard obj) throws RuntimeException {
+    public void write(SudokuBoard obj) throws RuntimeException, ExceptionDao {
         try (FileOutputStream fileOutputStream = new FileOutputStream(fileName);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
 
@@ -41,7 +47,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
         } catch (IOException e) {
 
-            throw new RuntimeException(e);
+            throw new ExceptionDao(listBundle.getObject("_fileError").toString());
 
         }
     }

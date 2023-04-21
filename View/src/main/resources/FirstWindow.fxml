@@ -6,13 +6,12 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FirstWindowController">
    <children>
-      <Button fx:id="startButton" graphicTextGap="3.0" layoutX="78.0" layoutY="39.0" mnemonicParsing="false" onAction="#onActionButtonStartGame" prefHeight="54.0" prefWidth="143.0" text="Start">
+      <Button fx:id="startButton" graphicTextGap="3.0" layoutX="78.0" layoutY="39.0" mnemonicParsing="false" onAction="#onActionButtonStartGame" prefHeight="54.0" prefWidth="143.0" text="%_StartGame">
          <font>
-            <Font size="24.0" />
-            <Font name="System Bold" />
+            <Font size="24.0" name="System Bold"/>
          </font>
       </Button>
-      <ComboBox fx:id="languageComboBox" layoutX="74.0" layoutY="238.0" prefWidth="150.0" promptText="Language" />
-      <ComboBox fx:id="difficultyComboBox" layoutX="62.0" layoutY="140.0" prefHeight="44.0" prefWidth="176.0" promptText="Dificulty Level" />
+      <ComboBox fx:id="languageComboBox" layoutX="75.0" layoutY="250.0" onAction="#language" prefWidth="150.0" promptText="%_comboboxlan" />
+      <ComboBox fx:id="difficultyComboBox" layoutX="62.0" layoutY="150.0" prefHeight="44.0" prefWidth="176.0" promptText="%_comboboxdiff" />
    </children>
 </AnchorPane>

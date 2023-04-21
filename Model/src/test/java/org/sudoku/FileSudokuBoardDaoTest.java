@@ -2,6 +2,8 @@ package org.sudoku;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.sudoku.exceptions.ExceptionDao;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileSudokuBoardDaoTest {
@@ -12,7 +14,7 @@ public class FileSudokuBoardDaoTest {
     SudokuBoard sudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver());
 
     @Test
-    void writeReadTest(){
+    void writeReadTest() throws ExceptionDao {
         dao.write(sudokuBoard);
         SudokuBoard sudokuBoard1 = dao.read();
 
